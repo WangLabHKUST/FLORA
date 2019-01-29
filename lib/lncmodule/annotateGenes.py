@@ -15,6 +15,10 @@ def annotateGenes(reference, inputGTF, output, distanceLimit, numberLimit):
             continue
         for i, elem in enumerate(inputGTF[key]):
             # for each gene, check with currentReference
+            # if currentReference is empty
+            if not currentReference:
+                print "Genomic Region identified by " + key + " does not contain any annotation"
+                continue
             result = findNearbyGenomicElements(elem, currentReference, distanceLimit, numberLimit)
             # print results to output
             printToOutput(elem, result, writer)

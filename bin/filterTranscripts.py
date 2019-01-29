@@ -19,14 +19,15 @@ def generateLncTranscriptome(inputFileName, exonNumberCutoff, lengthCutoff, cpat
         os.mkdir('tmp/')
     # convert the input gtf file (inputFileName) into bed file
     print >> sys.stdout, 'convert input gtf file into bed file'
+    newName = inputFileName.split("/")[-1]
     bedFilePositive = 'tmp/'+ inputFileName + '.positive.bed'
     bedFileNegative = 'tmp/'+ inputFileName + '.negative.bed'
-    gtfToCpatBed(inputFileName, bedFilePositive, '+')
-    gtfToCpatBed(inputFileName, bedFileNegative, '-')
+    gtfToCpatBed(newName, bedFilePositive, '+')
+    gtfToCpatBed(newName, bedFileNegative, '-')
     # summarize the exon number and transcript length from bed file
     # generate the list that contains transcript id that fit exonNumberCutoff and lengthCutoff
     print >> sys.stdout, 'summarize the exon number and length of transcripts'
-    exonSummarize = 'tmp/' + inputFileName + '.exonAndLength.txt'
+    exonSummarize = 'tmp/' + newName + '.exonAndLength.txt'
     exonFiltered = filterExonNumberAndLength(bedFilePositive, exonNumberCutoff, lengthCutoff, exonSummarize)
 
     # run CPAT
