@@ -148,7 +148,7 @@ getnetwork()
     output: coding - target lncRNA  regulatory network
 
 makePrediction()
-    usage: makePrediction(lnc.name,           # name of lncRNA 
+    usage: makePrediction(lnc.name,           # name of lncRNA
                           lnc.coding,         # coding - target lncRNA  regulatory network, generated in getnetwork() function
                           gotype)             # ["regulator","target","all"] use regulator/target/all genes in the netowrk to do the prediction
     output: list of GO terms
@@ -160,7 +160,7 @@ makePrediction()
 ######### Example code for predicting the function of LINC01614 (your lncRNA of interest) #########
 
 [Command Line]
-Rscript example.R ../bin/functionalPrediction.R lnc.info.txt coding.info.txt network.txt output_dir LINC01614 
+Rscript example.R ../bin/functionalPrediction.R lnc.info.txt coding.info.txt network.txt output_dir LINC01614
 
 outputs:
   LINC01614_lnc.coding.txt   # table of genes connected with your lncRNA of interest
@@ -170,3 +170,4 @@ outputs:
 ```
 ![image](https://github.com/shuangat/FLORA/blob/master/data/LINC01614.png?raw=true)
 
+29 Jan 2019
