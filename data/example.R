@@ -26,7 +26,7 @@ write.table(GO, paste(output_dir,"/",lnc.name,"_GO.txt",sep=""), sep="\t", row.n
 # Plotting significant GO terms associated with the networks of the lncRNA
 library(ggplot2)
 pdf( file=paste(output_dir,"/",lnc.name,"_GO.pdf",sep = "")) 
-GO$term.name = factor(GO$term.name, levels = GO$term.name)
+GO$term.name = factor(GO$term.name, levels = rev(GO$term.name))
 ggplot(aes(x = term.name, y = -log10(GO$p.value), fill = domain), data = GO) + 
   geom_bar(stat="identity",position="dodge") +
   labs(x = "", y = "-log10_Pvalue", title= lnc.name )  + coord_flip() +
