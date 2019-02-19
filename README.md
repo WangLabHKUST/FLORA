@@ -168,6 +168,6 @@ outputs:
   LINC01614_GO.pdf           # figure of significant GO terms associated with your lncRNA of interest
 
 ```
-<div align=center><src="https://github.com/WangLabHKUST/FLORA/blob/shuangat/data/LINC01614_GO.png"/></div>
+![image](https://github.com/WangLabHKUST/FLORA/blob/shuangat/data/LINC01614_GO.png)
 
 19 Feb 2019
