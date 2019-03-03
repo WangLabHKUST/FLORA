@@ -43,14 +43,32 @@ functionalPrediction <- function(lnc.name, lnc.coding) {
   library(gProfileR)
   
   lnc.coding <- data.frame(lnc.coding)
+<<<<<<< HEAD
  
   gene.use <- matrix(nrow = nrow(lnc.coding), ncol = 1)
   for (i in 1:nrow(lnc.coding)) {
     gene.use[i] <- setdiff(c(as.character(lnc.coding[i,1]),as.character(lnc.coding[i,2])), lnc.name)
+=======
+  lnc.coding <- subset(lnc.coding, pvalue=="0")
+  gene.regulator <- setdiff(lnc.coding[,1], lnc.name)
+  gene.target <- setdiff(lnc.coding[,2], lnc.name)
+  gene.all <- setdiff(union(lnc.coding[,1], lnc.coding[,2]), lnc.name)
+  
+  if (gotype == "regulator") {
+    gene.use <- gene.regulator
+  } else if (gotype == "target") {
+    gene.use <- gene.target
+  } else {
+    gene.use <- gene.all
+>>>>>>> 097f5bdc52221dfb93b3d5036247fd323996e15a
   }
   gene.use <- as.character(gene.use)
   
+<<<<<<< HEAD
   GO <- gprofiler(gene.use, organism = "hsapiens",ordered_query = T,hier_filtering="strong", max_p_value=0.01)
+=======
+  GO <- gprofiler(gene.use, organism = "hsapiens", ordered_query = T, hier_filtering="strong", max_p_value=0.01)
+>>>>>>> 097f5bdc52221dfb93b3d5036247fd323996e15a
   GO <- GO[order(GO[,3]),]
   
   BP <- subset(GO, domain == "BP")
