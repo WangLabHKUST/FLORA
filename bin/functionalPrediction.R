@@ -2,7 +2,7 @@ getnetwork <- function(lnc.info, coding.info, network, lnc.name) {
   j <- which(lnc.info$name == lnc.name)
   lnc.id <- as.character(lnc.info[j,1]) 
   
-  tmp <- subset(network, (Regulator == lnc.id) | (Target == lnc.id) )
+  tmp <- subset(network, (Gene1 == lnc.id) | (Gene2 == lnc.id) )
   tmp <- data.frame(tmp)
   
   tmp.name <- matrix(nrow = nrow(tmp), ncol = ncol(tmp))
@@ -39,22 +39,18 @@ getnetwork <- function(lnc.info, coding.info, network, lnc.name) {
 }
 
 
-makePrediction <- function(lnc.name, lnc.coding, gotype="all") {
+functionalPrediction <- function(lnc.name, lnc.coding) {
   library(gProfileR)
   
-  gene.regulator <- setdiff(lnc.coding[,1], lnc.name)
-  gene.target <- setdiff(lnc.coding[,2], lnc.name)
-  gene.all <- setdiff(union(lnc.coding[,1], lnc.coding[,2]), lnc.name)
-  
-  if (gotype == "regulator") {
-    gene.use <- gene.regulator
-  } else if (gotype == "target") {
-    gene.use <- gene.target
-  } else {
-    gene.use <- gene.all
+  lnc.coding <- data.frame(lnc.coding)
+ 
+  gene.use <- matrix(nrow = nrow(lnc.coding), ncol = 1)
+  for (i in 1:nrow(lnc.coding)) {
+    gene.use[i] <- setdiff(c(as.character(lnc.coding[i,1]),as.character(lnc.coding[i,2])), lnc.name)
   }
+  gene.use <- as.character(gene.use)
   
-  GO <- gprofiler(gene.use, organism = "hsapiens",ordered_query = T,hier_filtering="strong")
+  GO <- gprofiler(gene.use, organism = "hsapiens",ordered_query = T,hier_filtering="strong", max_p_value=0.01)
   GO <- GO[order(GO[,3]),]
   
   BP <- subset(GO, domain == "BP")
@@ -63,4 +59,3 @@ makePrediction <- function(lnc.name, lnc.coding, gotype="all") {
   
   return(list(gene.use=gene.use, GO=GO, BP=BP, CC=CC, MF=MF))
 }
-
