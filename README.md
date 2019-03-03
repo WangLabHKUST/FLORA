@@ -149,8 +149,7 @@ getnetwork()
 
 makePrediction()
     usage: makePrediction(lnc.name,           # name of lncRNA
-                          lnc.coding,         # coding - target lncRNA  regulatory network, generated in getnetwork() function
-                          gotype)             # ["regulator","target","all"] use regulator/target/all genes in the netowrk to do the prediction
+                          lnc.coding)         # coding - target lncRNA  regulatory network, generated in getnetwork() function
     output: list of GO terms
 
 ```
@@ -168,6 +167,6 @@ outputs:
   LINC01614_GO.pdf           # figure of significant GO terms associated with your lncRNA of interest
 
 ```
-<div align=center><img width="600" height="360" src="https://github.com/WangLabHKUST/FLORA/blob/shuangat/data/LINC01614_GO.png"/></div>
+<div align=center><img width="600" height="360" src="https://github.com/WangLabHKUST/FLORA/blob/shuangat/data/LINC01614.png"/></div>
 
 19 Feb 2019
