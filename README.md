@@ -88,8 +88,7 @@ optional arguments:
   -o OUTPUTGTF  Output prefix for the final transcriptome GTF file
 ```
 
-Identify novel lncRNA
-Example:
+Identify novel lncRNA by cuffcompare
 
 ```
 # Annotate lncRNAs according to reference GTF/GFF files
@@ -104,7 +103,6 @@ paste <(awk '{print $4"\t"$5"\t"$1"\t"$2"\t"$3}' REF1.${yourGTF}.tmap) <(cut -f1
 
 # run Annotate_lncRNAs.py
 Annotate_lncRNAs ${yourGTF}.anno.txt ${yourGTF}
-
 ```
 
 ### annotateTranscripts.py
