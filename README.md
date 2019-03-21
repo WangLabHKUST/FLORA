@@ -117,7 +117,7 @@ optional arguments:
 filterTranscripts.py -r reference.fa -x Human_Hexamer.tsv -m Human_logitModel.RData -o lncRNA.gtf merge.gtf
 ```
 
-### LncRNA Annotation
+### Step 4: LncRNA Annotation
 
 **AnnotateNovelLncRNA.sh** utilizes cuffcompare to compare the prospective lncRNAs with reference annotation (downloadable from Gencode, RefSeq, Ensembl; allowed up to 3 GTF files in the comparison), and lncRNA-expressing loci with no overlap with known genomic features were defined as novel. A detailed report of each lncRNA loci and its overlapping genes, as well as a GTF containing only novel lncRNA loci are generated.
 
@@ -126,7 +126,7 @@ filterTranscripts.py -r reference.fa -x Human_Hexamer.tsv -m Human_logitModel.RD
 ./AnnotateNovelLncRNA.sh lncRNA.gtf Gencode.gtf Ensembl.gtf RefSeq.gtf
 ```
 
-#### Step 5: Functional Prediction
+### Step 5: Functional Prediction
 
 FLORA predicted the potential functions of lncRNAs by considering that are in the transcriptional network. Firstly, gene transcriptional network can be constructed by **ARACNe-AP** software (https://github.com/califano-lab/ARACNe-AP) based on normalized expression data. To obtain a stable network, 100 reproducible bootstraps were performed and consolidated (time-consuming step, we recommend network construction in parallel on high-performance clusters; example code provided below).
 
