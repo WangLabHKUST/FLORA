@@ -71,6 +71,7 @@ generateFilteredBams.py -g reference.gtf -t protein_coding inputBams.txt
 Transcriptome assembly can be achieved with **StringTie** from the preprocessed RNA-seq data. Since this step can be slow on large datasets, we recommend running StringTie on high-performance clusters in parallel (example code provided below).
 Assembled transcripts in each sample were selected for merging by **Stringtie merge** with customized parameters (parameter settings in our manuscript: (A) longer than 200 nucleotides; (B) with expression level over 0.1 TPM and 0.1 FPKM; (C) account for over 10% of all isoforms from the same loci).
 
+\# Example:
 ```
 # StringTie
 stringtie clean.bam -o clean.bam.gtf -G reference.long_noncoding_RNAs.gtf
