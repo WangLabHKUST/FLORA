@@ -41,7 +41,7 @@ python setup.py install
 
 ### Step 1: Generate Filtered BAM
 
-Starting from bam files, **generateFilteredBams.py** generates prefiltered bam files by automatically removing reads with low mapping quality and reads mapped to ribosomal RNAs (built in for hg38, gh19, mm10, mm9, danRer11, danRer10, dm6). In addition, user-defined list of gene types (such as protein-coding, pseudogenes, immunoglobin and T-cell receptor genes) can also be filtered out from the bam files.
+Starting from bam files, **generateFilteredBams.py** generates prefiltered bam files by automatically removing reads with low mapping quality and reads mapped to ribosomal RNAs (built in for hg38, hg19, mm10, mm9, danRer11, danRer10, dm6). In addition, user-defined list of gene types (such as protein-coding, pseudogenes, immunoglobin and T-cell receptor genes) can also be filtered out from the bam files.
 
 ```
 usage: generateFilteredBams [-h] -g INPUTGTF [-t TYPES [TYPES ...]]
@@ -61,7 +61,7 @@ optional arguments:
   -n NTHREAD            Number of threads to be used for bedtools intersect.
 
 ```
-\# Example:
+Example:
 ```
 generateFilteredBams.py -g reference.gtf -t protein_coding inputBams.txt
 ```
@@ -71,7 +71,7 @@ generateFilteredBams.py -g reference.gtf -t protein_coding inputBams.txt
 Transcriptome assembly can be achieved with **StringTie** from the preprocessed RNA-seq data. Since this step can be slow on large datasets, we recommend running StringTie on high-performance clusters in parallel (example code provided below).
 Assembled transcripts in each sample were selected for merging by **Stringtie merge** with customized parameters (parameter settings in our manuscript: (A) longer than 200 nucleotides; (B) with expression level over 0.1 TPM and 0.1 FPKM; (C) account for over 10% of all isoforms from the same loci).
 
-\# Example:
+Example:
 ```
 # StringTie
 stringtie clean.bam -o clean.bam.gtf -G reference.long_noncoding_RNAs.gtf
@@ -112,7 +112,7 @@ optional arguments:
   -o OUTPUTGTF  Output prefix for the final transcriptome GTF file.
 ```
 
-\# Example:
+Example:
 ```
 filterTranscripts.py -r reference.fa -x Human_Hexamer.tsv -m Human_logitModel.RData -o lncRNA.gtf merge.gtf
 ```
@@ -121,7 +121,7 @@ filterTranscripts.py -r reference.fa -x Human_Hexamer.tsv -m Human_logitModel.RD
 
 **AnnotateNovelLncRNA.sh** utilizes cuffcompare to compare the prospective lncRNAs with reference annotation (downloadable from Gencode, RefSeq, Ensembl; allowed up to 3 GTF files in the comparison), and lncRNA-expressing loci with no overlap with known genomic features were defined as novel. A detailed report of each lncRNA loci and its overlapping genes, as well as a GTF containing only novel lncRNA loci are generated.
 
-\# Example:
+Example:
 ```
 ./AnnotateNovelLncRNA.sh lncRNA.gtf Gencode.gtf Ensembl.gtf RefSeq.gtf
 ```
@@ -130,7 +130,7 @@ filterTranscripts.py -r reference.fa -x Human_Hexamer.tsv -m Human_logitModel.RD
 
 FLORA predicted the potential functions of lncRNAs by considering that are in the transcriptional network. Firstly, gene transcriptional network can be constructed by **ARACNe-AP** software (https://github.com/califano-lab/ARACNe-AP) based on normalized expression data. To obtain a stable network, 100 reproducible bootstraps were performed and consolidated (time-consuming step, we recommend network construction in parallel on high-performance clusters; example code provided below).
 
-\# Example code for ARACNe-AP
+Example code for ARACNe-AP:
 ```
 # Perform 3 bootstrapping and network reconstruction
 for i in {1..3}
@@ -148,7 +148,7 @@ java -Xmx120G -jar .../aracne.jar -o output/ --consolidate
 Next, to predict the function of a given lncRNA, **functionalPrediction.R** was implemented to process the constructed network, select all the genes with significant associations with the lncRNA, and perform Gene Ontology (GO) enrichment analysis with g-profiler. This step will output the list of genes with significant associations with the lncRNA (as lncRNAxx_gene_list.txt) and the enriched GO terms of the genes associated with the lncRNA (lncRNAxx_GO.txt and lncRNAxx_GO.png).
 Additionally, the gene transcription network constructed based on the expression of all coding genes and lncRNAs in gastric cancer is provided. To analyze the genes associated with the lncRNAs in gastric cancer, our example code is provided below to automatically output the significantly associated genes and GO terms.
 
-\# Example code for predicting the function of "LINC01614" (your lncRNA of interest)
+Example code for predicting the function of "LINC01614" (your lncRNA of interest):
 ```
 Rscript example.R ../bin/functionalPrediction.R lnc.info.txt coding.info.txt network.txt output_dir LINC01614
 
