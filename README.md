@@ -88,6 +88,25 @@ optional arguments:
   -o OUTPUTGTF  Output prefix for the final transcriptome GTF file
 ```
 
+Identify novel lncRNA
+Example:
+
+```
+# Annotate lncRNAs according to reference GTF/GFF files
+# Generate report of novel lncRNA vs loci overlapped with annotated genes, and GTF file of novel lncRNAs
+# Minimal reference GTF required: 1
+
+# run cuffcompare
+cuffcompare -r ${referenceGTF1} -o REF1 ${yourGTF}
+cuffcompare -r ${referenceGTF2} -o REF2 ${yourGTF}
+cuffcompare -r ${referenceGTF3} -o REF3 ${yourGTF}
+paste <(awk '{print $4"\t"$5"\t"$1"\t"$2"\t"$3}' REF1.${yourGTF}.tmap) <(cut -f1-3 REF2.${yourGTF}.tmap) <(cut -f1-3 REF3.${yourGTF}.tmap) > ${yourGTF}.anno.txt
+
+# run Annotate_lncRNAs.py
+Annotate_lncRNAs ${yourGTF}.anno.txt ${yourGTF}
+
+```
+
 ### annotateTranscripts.py
 
 Find overlapped and nearby genes of lncRNAs in reference annotation (RefSeq or GENCODE annotation in GFF format).
@@ -169,4 +188,4 @@ outputs:
 ```
 <div align=center><img width="500" height="450" src="https://github.com/WangLabHKUST/FLORA/blob/shuangat/data/LINC01614.png"/></div>
 
-1 Mar 2019
+21 Mar 2019

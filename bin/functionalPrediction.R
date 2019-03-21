@@ -5,7 +5,7 @@ getnetwork <- function(lnc.info, coding.info, network, lnc.name) {
   tmp <- subset(network, (Gene1 == lnc.id) | (Gene2 == lnc.id) )
   tmp <- data.frame(tmp)
   
-  tmp.name <- matrix(nrow = nrow(tmp), ncol = ncol(tmp))
+  tmp.name <- data.frame(nrow = nrow(tmp), ncol = ncol(tmp))
   for (i in 1: nrow(tmp)) {
     for (j in 1:2) {
       k <- which(lnc.info$id == as.character(tmp[i,j]) )
