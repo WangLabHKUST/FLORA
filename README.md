@@ -88,14 +88,14 @@ optional arguments:
   -o OUTPUTGTF  Output prefix for the final transcriptome GTF file.
 ```
 
-### Annotate_lncRNAs.py
+### annotate_lncRNAs.py
 
 Annotate lncRNAs according to reference GTF/GFF files
 Generate report of novel lncRNA vs loci overlapped with annotated genes, and GTF file of novel lncRNAs
 Minimal reference GTF required: 1
 
 ```
-usage: Annotate_lncRNAs yourGTF.anno.txt yourGTF
+usage: annotate_lncRNAs yourGTF.anno.txt yourGTF
 
 positional arguments:
   yourGTF.anno.txt      The file could be output from Cuffcompare.
@@ -192,11 +192,12 @@ cuffcompare -r RefSeq.reference.gtf -o REF3 FLORA_out.gtf
 paste <(awk '{print $4"\t"$5"\t"$1"\t"$2"\t"$3}' REF1.FLORA_out.gtf.tmap) <(cut -f1-3 REF2.FLORA_out.gtf.tmap) <(cut -f1-3 REF3.FLORA_out.gtf.tmap) > FLORA_out.gtf.anno.txt
 
 # run Annotate_lncRNAs.py
-Annotate_lncRNAs.py FLORA_out.gtf.anno.txt FLORA_out.gtf
+annotate_lncRNAs.py FLORA_out.gtf.anno.txt FLORA_out.gtf
 ```
 
 ### Calculate gene expression
 
+You can calculate coding/lnc gene expression using featureCounts.
 
 ### Build gene network
 
