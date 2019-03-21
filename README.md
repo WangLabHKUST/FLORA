@@ -102,7 +102,7 @@ cuffcompare -r ${referenceGTF3} -o REF3 ${yourGTF}
 paste <(awk '{print $4"\t"$5"\t"$1"\t"$2"\t"$3}' REF1.${yourGTF}.tmap) <(cut -f1-3 REF2.${yourGTF}.tmap) <(cut -f1-3 REF3.${yourGTF}.tmap) > ${yourGTF}.anno.txt
 
 # run Annotate_lncRNAs.py
-Annotate_lncRNAs ${yourGTF}.anno.txt ${yourGTF}
+Annotate_lncRNAs.py ${yourGTF}.anno.txt ${yourGTF}
 ```
 
 ### annotateTranscripts.py
