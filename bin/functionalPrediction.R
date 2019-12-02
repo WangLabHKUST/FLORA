@@ -39,7 +39,7 @@ getnetwork <- function(lnc.info, coding.info, network, lnc.name) {
 }
 
 
-functionalPrediction <- function(lnc.name, lnc.coding) {
+makePrediction <- function(lnc.name, lnc.coding) {
   library(gProfileR)
   
   lnc.coding <- data.frame(lnc.coding)
