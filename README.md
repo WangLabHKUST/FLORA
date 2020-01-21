@@ -145,19 +145,38 @@ done
 java -Xmx120G -jar .../aracne.jar -o output/ --consolidate
 ```
 
-Next, to predict the function of a given lncRNA, **functionalPrediction.R** was implemented to process the constructed network, select all the genes with significant associations with the lncRNA, and perform Gene Ontology (GO) enrichment analysis with g-profiler. This step will output the list of genes with significant associations with the lncRNA (as lncRNAxx_gene_list.txt) and the enriched GO terms of the genes associated with the lncRNA (lncRNAxx_GO.txt and lncRNAxx_GO.png).
+Next, to predict the function of given lncRNA(s), **functionalPrediction.R** was implemented to process the constructed network, select all the genes with significant associations with the lncRNA, and perform Gene Ontology (GO) enrichment analysis with g-profiler. This step will output the list of genes with significant associations with the lncRNA (as lncRNAxx_gene_list.txt) and the enriched GO terms of the genes associated with the lncRNA (lncRNAxx_GO.txt and lncRNAxx_GO.png).
 Additionally, the gene transcription network constructed based on the expression of all coding genes and lncRNAs in gastric cancer is provided. To analyze the genes associated with the lncRNAs in gastric cancer, our example code is provided below to automatically output the significantly associated genes and GO terms.
 
-Example code for predicting the function of "LINC01614" (your lncRNA of interest):
+Example code for predicting the function of "H19" and "LINC01614" (your lncRNA(s) of interest):
 ```
-Rscript example.R ../bin/functionalPrediction.R lnc.info.txt coding.info.txt network.txt output_dir LINC01614
+Rscript functionalPrediction.R -a example/data/lnc.info.txt -b example/data/coding.info.txt -c example/data/lnc.FPKM.txt -d example/data/coding.FPKM.txt -m spearman  -o output -i H19,LINC01614 -x 0.5 -n data/ARACNe_network.txt
+
+Usage: functionalPrediction.R [-h] -a LncInfo -b CodingInfo -c LncExpr -d CodingExpr -o OutputDir -i LINC1,LINC2,LINC3,... -m CorMethod [-n ARACNeNetwork] [-x CorCutoff] [-y CorAdjpCutoff] [-z GOCutoff] [-p PorN]
+
+arguments:
+    -a|--LncInfo          information of lncRNAs, including gene.id and gene.name
+    -b|--CodingInfo       information of coding genes, including gene.id and gene.name
+    -c|--LncExpr          expression of lncRNAs
+    -d|--CodingExpr       expression of coding genes
+    -o|--OutputDir        output directory
+    -i|--LINC             the name(s) of your lncRNA(s) of interest, separated by ","
+    -m|--CorMethod        correlation method,  method = c("pearson", "spearman", "distance")
+
+optional arguments:
+    -h|--Help             help
+    -n|--ARACNeNetwork    output network of ARACNe, optional
+    -x|--CorCutoff        cutoff for correlation coefficient. by default use = 0
+    -y|--CorAdjpCutoff    cutoff for correlation adjust p-value. by default use = 0.001
+    -z|--GOCutoff         cutoff for GO terms p-value. by default use = 0.001
+    -p|--PorN             use only "positive", "negative" or "all" related coding genes to do the prediction. by default use = "positive"
 
 outputs:
-  LINC01614_lnc.coding.txt   # table of genes connected with your lncRNA of interest
-  LINC01614_GO.txt           # table of significant GO terms associated with your lncRNA of interest
-  LINC01614_GO.pdf           # figure of significant GO terms associated with your lncRNA of interest
+  LINCX.net.txt          # table of genes connected with LINCX
+  LINCX.GO.txt           # table of significant GO terms associated with LINCX
+  LINCX.GO.pdf           # figure of significant GO terms associated with LINCX
 ```
-<div align=center><img width="500" height="450" src="https://github.com/WangLabHKUST/FLORA/blob/shuangat/data/LINC01614.png"/></div>
+<div align=center><img width="500" height="450" src="https://github.com/WangLabHKUST/FLORA/blob/shuangat/example/output/LINC01614.GO.png"/></div>
 
 
 

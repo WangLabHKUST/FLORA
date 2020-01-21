@@ -257,7 +257,7 @@ for (l in 1:nrow(lnc.name.pool)){
                                                        "keg" = "#66c2a5",  "rea"= "#fc8d62", "mir" = "#8da0cb",
                                                        "cor" = "#e78ac3")) +
         theme(legend.title=element_blank(), axis.title.x = element_text(size=9), plot.title = element_text(color = "black", face = "italic") )
-      ggsave(file = paste0(output_dir, "/", lnc.name, "_GO.pdf"), p)
+      ggsave(file = paste0(output_dir, "/", lnc.name, ".GO.pdf"), p)
     }
   }
   
