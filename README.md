@@ -162,7 +162,7 @@ arguments:
     -d|--CodingExpr       expression of coding genes
     -o|--OutputDir        output directory
     -i|--LINC             the name(s) of your lncRNA(s) of interest, separated by ","
-    -m|--CorMethod        correlation method,  method = c("pearson", "spearman", "distance")
+    -m|--CorMethod        correlation method,  CorMethod = c("pearson", "spearman", "distance")
 
 optional arguments:
     -h|--Help             help
@@ -170,7 +170,7 @@ optional arguments:
     -x|--CorCutoff        cutoff for correlation coefficient. by default use = 0
     -y|--CorAdjpCutoff    cutoff for correlation adjust p-value. by default use = 0.001
     -z|--GOCutoff         cutoff for GO terms p-value. by default use = 0.001
-    -p|--PorN             use only "positive", "negative" or "all" related coding genes to do the prediction. by default use = "positive"
+    -p|--PorN             PorN = c("positive", "negative", "all"). "positive", "negative" or "all" related coding genes are used to do the prediction. by default use = "positive"
 
 outputs:
   LINCX.net.txt          # table of genes connected with LINCX
