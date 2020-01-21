@@ -128,7 +128,9 @@ Example:
 
 ### Step 5: Functional Prediction
 
-FLORA predicted the potential functions of lncRNAs by considering that are in the transcriptional network. Firstly, gene transcriptional network can be constructed by **ARACNe-AP** software (https://github.com/califano-lab/ARACNe-AP) based on normalized expression data. To obtain a stable network, 100 reproducible bootstraps were performed and consolidated (time-consuming step, we recommend network construction in parallel on high-performance clusters; example code provided below).
+FLORA predicted the potential functions of lncRNA(s) based on expression data.  **functionalPrediction.R** provides different correlation methods(Pearson, Spearman correlation, Distance) to construct network, which can also further combines with the gene transcriptional network. Later, all the genes with significant associations with the lncRNA are selected to perform Gene Ontology (GO) enrichment analysis with g-profiler. This step will output the list of genes with significant associations with the lncRNA (LINCX.net.txt) and the enriched GO terms of the genes associated with the lncRNA (LINCX.GO.txt and LINCX.GO.pdf).
+
+Optional, gene transcriptional network can be constructed by **ARACNe-AP** software (https://github.com/califano-lab/ARACNe-AP) based on normalized expression data. To obtain a stable network, 100 reproducible bootstraps were performed and consolidated (time-consuming step, we recommend network construction in parallel on high-performance clusters; example code provided below).
 
 Example code for ARACNe-AP:
 ```
@@ -145,8 +147,7 @@ done
 java -Xmx120G -jar .../aracne.jar -o output/ --consolidate
 ```
 
-Next, to predict the function of given lncRNA(s), **functionalPrediction.R** was implemented to process the constructed network, select all the genes with significant associations with the lncRNA, and perform Gene Ontology (GO) enrichment analysis with g-profiler. This step will output the list of genes with significant associations with the lncRNA (as LINCX.net.txt) and the enriched GO terms of the genes associated with the lncRNA (LINCX.GO.txt and LINCX.GO.png).
-Additionally, the gene transcription network constructed by ARACNe based on the expression of all coding genes and lncRNAs in gastric cancer is provided (example/data/ARACNe_network.txt). To analyze the genes associated with the lncRNAs in gastric cancer, our example code is provided below to automatically output the significantly associated genes and GO terms.
+To analyze the genes associated with the lncRNAs in gastric cancer, our example code is provided below to automatically output the significantly associated genes and GO terms. Additionally, the gene transcription network constructed by ARACNe based on the normalized expression of all coding genes and lncRNAs in gastric cancer is provided (example/data/ARACNe_network.txt). 
 
 Example code for predicting the function of "H19" and "LINC01614" (your lncRNA(s) of interest):
 ```
