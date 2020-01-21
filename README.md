@@ -145,8 +145,8 @@ done
 java -Xmx120G -jar .../aracne.jar -o output/ --consolidate
 ```
 
-Next, to predict the function of given lncRNA(s), **functionalPrediction.R** was implemented to process the constructed network, select all the genes with significant associations with the lncRNA, and perform Gene Ontology (GO) enrichment analysis with g-profiler. This step will output the list of genes with significant associations with the lncRNA (as lncRNAxx_gene_list.txt) and the enriched GO terms of the genes associated with the lncRNA (lncRNAxx_GO.txt and lncRNAxx_GO.png).
-Additionally, the gene transcription network constructed based on the expression of all coding genes and lncRNAs in gastric cancer is provided. To analyze the genes associated with the lncRNAs in gastric cancer, our example code is provided below to automatically output the significantly associated genes and GO terms.
+Next, to predict the function of given lncRNA(s), **functionalPrediction.R** was implemented to process the constructed network, select all the genes with significant associations with the lncRNA, and perform Gene Ontology (GO) enrichment analysis with g-profiler. This step will output the list of genes with significant associations with the lncRNA (as LINCX.net.txt) and the enriched GO terms of the genes associated with the lncRNA (LINCX.GO.txt and LINCX.GO.png).
+Additionally, the gene transcription network constructed by ARACNe based on the expression of all coding genes and lncRNAs in gastric cancer is provided (example/data/ARACNe_network.txt). To analyze the genes associated with the lncRNAs in gastric cancer, our example code is provided below to automatically output the significantly associated genes and GO terms.
 
 Example code for predicting the function of "H19" and "LINC01614" (your lncRNA(s) of interest):
 ```
@@ -176,7 +176,7 @@ outputs:
   LINCX.GO.txt           # table of significant GO terms associated with LINCX
   LINCX.GO.pdf           # figure of significant GO terms associated with LINCX
 ```
-<div align=center><img width="500" height="450" src="https://github.com/WangLabHKUST/FLORA/blob/shuangat/example/output/LINC01614.GO.png"/></div>
+<div align=center><img width="500" height="450" src="https://github.com/WangLabHKUST/FLORA/blob/shuangat/example/output/LINC0164.GO.png"/></div>
 
 
 
